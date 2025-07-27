@@ -1,15 +1,15 @@
 # FLAC Album Splitter
 
-A bash script that automatically splits single FLAC album files into individual tracks using CUE sheet information.
+A bash script that automatically splits single FLAC music album files into individual song tracks using CUE sheet information.
 
 ## Why This Tool Exists
 
-When digitizing an LP or ripping a CD, the result is usually a single large FLAC file accompanied by a CUE sheet that defines track boundaries. While this format preserves the original recording perfectly, it's not convenient for modern music players that expect individual track files.
+When digitizing an LP or ripping a CD, the result is usually a single large FLAC file containing the entire music album, accompanied by a CUE sheet that defines individual song track boundaries. While this format preserves the original recording perfectly, it's not convenient for modern music players that expect individual song files.
 
 This script bridges that gap by:
-- **Splitting** large FLAC albums into individual tracks
+- **Splitting** large music album files into individual song tracks
 - **Preserving** audio quality (lossless FLAC-to-FLAC conversion)
-- **Organizing** files with consistent naming (`01 - Track Name.flac`)
+- **Organizing** files with consistent naming (`01 - Song Title.flac`)
 - **Sanitizing** filenames for cross-platform compatibility
 
 ## Features
@@ -23,7 +23,7 @@ This script bridges that gap by:
 
 ## NTFS Filename Compatibility
 
-The script automatically sanitizes CUE file track titles to ensure compatibility with Windows NTFS filesystems by replacing problematic characters:
+The script automatically sanitizes CUE file song titles to ensure compatibility with Windows NTFS filesystems by replacing problematic characters:
 
 | Character | Replacement | Reason |
 |-----------|-------------|---------|
@@ -40,38 +40,71 @@ The script requires these tools to be installed:
 - **flac** - for FLAC codec support
 - Standard Unix tools (`sed`, `find`, `basename`, etc.)
 
-### Installation on Ubuntu/Debian:
+### Installation of prerequisites on Ubuntu/Debian:
 ```bash
 sudo apt-get install shntool flac
 ```
 
-### Installation on macOS (with Homebrew):
+### Installation of prerequisites on macOS (with Homebrew):
 ```bash
 brew install shntool flac
 ```
 
-### Installation on Fedora/RHEL:
+### Installation of prerequisites on Fedora/RHEL:
 ```bash
 sudo dnf install shntool flac
 ```
 
+## Installation
+
+After installing the prerequisites above, you need to make the script available on your system:
+
+### Option 1: System-wide installation (recommended)
+```bash
+sudo cp split_flac.sh /usr/local/bin/split_flac
+sudo chmod +x /usr/local/bin/split_flac
+```
+
+### Option 2: User-specific installation (Ubuntu/most Linux distros)
+```bash
+mkdir -p ~/.local/bin
+cp split_flac.sh ~/.local/bin/split_flac
+chmod +x ~/.local/bin/split_flac
+```
+
+Make sure `~/.local/bin` is in your PATH (it usually is by default on modern Linux distributions).
+
 ## Usage
 
-1. Place the script in a directory containing FLAC+CUE file pairs
-2. Make it executable:
-   ```bash
-   chmod +x split_flac.sh
-   ```
-3. Run it:
-   ```bash
-   ./split_flac.sh
-   ```
+The power of this script lies in its recursive processing capability. Simply navigate to the top-level directory containing your music collection and run:
 
-The script will:
-- Find all `.cue` files in the current directory and subdirectories
-- Look for matching `.flac` or `.FLAC` files
-- Split each album into numbered tracks: `01 - Song Title.flac`
-- Rename processed originals with `.del` extension
+```bash
+split_flac
+```
+
+The script will automatically:
+- Traverse the entire directory tree recursively
+- Find all music album FLAC+CUE file pairs at any depth
+- Process each album it discovers
+- Skip directories that have already been processed
+
+This means you can organize your music collection like this:
+```
+Music/
+├── Artist 1/
+│   ├── Album A/
+│   │   ├── Album A.flac
+│   │   └── Album A.cue
+│   └── Album B/
+│       ├── Album B.flac
+│       └── Album B.cue
+└── Artist 2/
+    └── Album C/
+        ├── Album C.flac
+        └── Album C.cue
+```
+
+And process everything with a single command from the `Music/` directory.
 
 ## File Structure
 
@@ -85,9 +118,9 @@ Album/
 **After:**
 ```
 Album/
-├── 01 - Opening Track.flac
+├── 01 - Opening Song.flac
 ├── 02 - Second Song.flac
-├── 03 - Another Track.flac
+├── 03 - Another Song.flac
 ├── Album Name.flac.del
 └── Album Name.cue.del
 ```
@@ -95,12 +128,12 @@ Album/
 ## Safety Features
 
 - **Non-destructive**: Original files are renamed to `.del`, not deleted
-- **Skip protection**: Won't re-process directories that already contain split tracks
+- **Skip protection**: Won't re-process directories that already contain split song tracks
 - **Error handling**: Reports failures and leaves originals untouched on errors
 
 ## Cleanup
 
-After verifying the split tracks work correctly, you can remove the backup files:
+After verifying the split song tracks work correctly, you can remove the backup files:
 
 ```bash
 find . -name "*.del" -delete
