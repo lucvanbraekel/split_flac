@@ -4,7 +4,7 @@ A bash script that automatically splits single FLAC music album files into indiv
 
 ## Why This Tool Exists
 
-When digitizing an LP or ripping a CD, the result is usually a single large FLAC file containing the entire music album, accompanied by a CUE sheet that defines individual song track boundaries. While this format preserves the original recording perfectly, it's not convenient for modern music players that expect individual song files.
+When digitizing an LP or ripping a CD to lossless format, the result is usually a single large FLAC file containing the entire music album, accompanied by a CUE sheet that defines individual song track boundaries. Popular ripping software like EAC (Exact Audio Copy), dBpoweramp, Whipper, and Rip Station often create these FLAC+CUE pairs to preserve perfect audio quality. While this format preserves the original recording perfectly, it's not convenient for modern music players that expect individual song files.
 
 This script bridges that gap by:
 - **Splitting** large music album files into individual song tracks
@@ -145,7 +145,7 @@ MIT License - see the script header for full details.
 
 ## Contributing
 
-Issues and pull requests welcome! This script was created to solve a common problem in digital music archiving.
+Issues and pull requests welcome! This script was created to solve a common problem in digital music archiving and is compatible with FLAC+CUE files created by EAC, dBpoweramp, Whipper, Rip Station, and other popular ripping software.
 
 ## Alternative Names Considered
 
