@@ -4,7 +4,7 @@ A bash script that automatically splits single FLAC album files into individual 
 
 ## Why This Tool Exists
 
-Many vinyl LP and CD rips come as single large FLAC files accompanied by CUE sheets that define track boundaries. While this format preserves the original recording perfectly, it's not convenient for modern music players that expect individual track files.
+When digitizing an LP or ripping a CD, the result is usually a single large FLAC file accompanied by a CUE sheet that defines track boundaries. While this format preserves the original recording perfectly, it's not convenient for modern music players that expect individual track files.
 
 This script bridges that gap by:
 - **Splitting** large FLAC albums into individual tracks
@@ -15,7 +15,7 @@ This script bridges that gap by:
 ## Features
 
 - 🎵 **Lossless splitting** using shntool
-- 📁 **Recursive processing** of directory trees
+- 📁 **Recursive processing** - automatically finds and processes all FLAC+CUE pairs in an entire directory tree
 - 🔄 **Smart duplicate detection** (won't re-split already processed albums)
 - 🖥️ **NTFS compatibility** (sanitizes problematic characters in track names)
 - 🛡️ **Safe operation** (renames originals to `.del` instead of deleting)
