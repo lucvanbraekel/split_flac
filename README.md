@@ -154,3 +154,7 @@ Issues and pull requests welcome! This script was created to solve a common prob
 - `split_cue_flac.sh`
 
 The current name `split_flac.sh` was chosen for simplicity and clarity.
+
+## Note
+
+We have occasionally seen recordings consisting of .wv/.cue pairs (WavPack). This script currently does not split these. However, the underlying 'shntool' command that we are using supports the .wv format as well. The script could be modified to support .wv extensions, and the WavPack codecs can be installed with 'sudo apt-get install wavpack'.
